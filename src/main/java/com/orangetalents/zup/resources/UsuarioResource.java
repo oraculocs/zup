@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.orangetalents.zup.UsuarioService;
 import com.orangetalents.zup.dto.UsuarioDTO;
+import com.orangetalents.zup.services.UsuarioService;
 
 @RestController
 @RequestMapping(value = "/usuarios")

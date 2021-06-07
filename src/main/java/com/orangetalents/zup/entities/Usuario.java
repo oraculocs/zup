@@ -9,6 +9,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.br.CPF;
+
 
 @Entity
 @Table(name = "tb_usuario")
@@ -18,9 +24,22 @@ public class Usuario implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	@NotEmpty
+	@Column(length = 50, nullable = false)
 	private String nome;
+	
+	@NotEmpty
+	@Email
+	@Column(unique = true, nullable = false)
 	private String email;
+	
+	@NotEmpty
+	@CPF
+	@Column(unique = true, nullable = false)
 	private String cpf;
+	
+	@NotNull
 	@Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
 	private Instant dataNascimento;
 	
@@ -28,7 +47,6 @@ public class Usuario implements Serializable{
 	}
 
 	public Usuario(Long id, String nome, String email, String cpf, Instant dataNascimento) {
-		super();
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
