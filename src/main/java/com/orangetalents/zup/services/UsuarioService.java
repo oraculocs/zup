@@ -43,6 +43,9 @@ public class UsuarioService {
 
 	@Transactional
 	public UsuarioDTO insert(UsuarioDTO dto) {
+		if(findByCPF(dto) != null) {
+			throw new com.orangetalents.zup.services.exceptions.DataIntegrityViolationException("CPF já cadastrado na base de dados!");
+		}
 		Usuario entity = new Usuario();
 		entity.setNome(dto.getNome());
 		entity.setEmail(dto.getEmail());
@@ -83,5 +86,13 @@ public class UsuarioService {
 		}catch(DataIntegrityViolationException e) {
 			throw new DatabaseException("Integridade violada");
 		}
+	}
+	
+	private Usuario findByCPF(UsuarioDTO objDto) {
+		Usuario obj = repository.findbyCPF(objDto.getCpf());
+		if(obj != null) {
+			return obj;
+		}
+		return null;
 	}
 }

@@ -25,18 +25,19 @@ public class Usuario implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotEmpty
+	@NotEmpty(message = "Campo nome é obrigatório!")
 	@Column(length = 50, nullable = false)
 	private String nome;
 	
-	@NotEmpty
+	@NotEmpty(message = "Campo email é obrigatório!")
 	@Email
 	@Column(unique = true, nullable = false)
 	private String email;
 	
-	@NotEmpty
+	
+	//@Column(unique = true, nullable = false)
+	@NotEmpty(message = "Campo CPF é requerido!")
 	@CPF
-	@Column(unique = true, nullable = false)
 	private String cpf;
 	
 	@NotNull
