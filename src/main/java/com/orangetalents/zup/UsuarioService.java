@@ -61,4 +61,8 @@ public class UsuarioService {
 		
 		return new UsuarioDTO(entity);
 	}
+
+	public void delete(Long id) {
+		repository.deleteById(id);
+	}
 }
