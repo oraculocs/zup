@@ -47,4 +47,18 @@ public class UsuarioService {
 		
 		return new UsuarioDTO(entity);
 	}
+
+	@Transactional
+	public UsuarioDTO update(Long id, UsuarioDTO dto) {
+		Usuario entity = repository.getOne(id);
+		
+		entity.setNome(dto.getNome());
+		entity.setEmail(dto.getEmail());
+		entity.setCpf(dto.getCpf());
+		entity.setDataNascimento(dto.getDataNascimento());
+		
+		entity = repository.save(entity);
+		
+		return new UsuarioDTO(entity);
+	}
 }
