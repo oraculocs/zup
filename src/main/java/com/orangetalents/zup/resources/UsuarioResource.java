@@ -1,7 +1,5 @@
 package com.orangetalents.zup.resources;
 
-import java.time.Instant;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.orangetalents.zup.UsuarioService;
-import com.orangetalents.zup.entities.Usuario;
+import com.orangetalents.zup.dto.UsuarioDTO;
 
 @RestController
 @RequestMapping(value = "/usuarios")
@@ -21,14 +19,8 @@ public class UsuarioResource {
 	private UsuarioService service;
 	
 	@GetMapping
-	public ResponseEntity<List<Usuario>> findAll(){
-//		List<Usuario> lista = new ArrayList<>();
-		
-//		lista.add(new Usuario(1L, "Vitor Alvim", "vitor@gmail.com", "12345678901", Instant.now()));
-//		lista.add(new Usuario(2L, "Vitoria Sousa", "vitoria@gmail.com", "12345123901", Instant.now()));
-//		lista.add(new Usuario(3L, "Alberto Brum", "alberto@gmail.com", "12345678101", Instant.now()));
-		
-		List<Usuario> lista = service.findAll();
+	public ResponseEntity<List<UsuarioDTO>> findAll(){
+		List<UsuarioDTO> lista = service.findAll();
 		
 		return ResponseEntity.ok().body(lista);
 		
