@@ -53,7 +53,6 @@ public class Usuario implements Serializable{
 	@Cascade(CascadeType.ALL)
 	private List<Veiculo> veiculos = new ArrayList<>();
 	
-	
 	public Usuario() {
 	}
 
@@ -107,10 +106,6 @@ public class Usuario implements Serializable{
 	
 	public List<Veiculo> getVeiculos() {
 		return veiculos;
-	}
-
-	public void setVeiculos(List<Veiculo> veiculos) {
-		this.veiculos = veiculos;
 	}
 
 	@Override

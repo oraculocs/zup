@@ -28,7 +28,7 @@ public class UsuarioService {
 	public List<UsuarioDTO> findAll(){
 		List<Usuario> lista = repository.findAll();
 		
-		List<UsuarioDTO> listaDto = lista.stream().map(x -> new UsuarioDTO(x)).collect(Collectors.toList());
+		List<UsuarioDTO> listaDto = lista.stream().map(x -> new UsuarioDTO(x, x.getVeiculos())).collect(Collectors.toList());
 		
 		return listaDto;
 	}
@@ -37,7 +37,7 @@ public class UsuarioService {
 	public UsuarioDTO findById(Long id) {
 		Optional<Usuario> obj = repository.findById(id);
 		Usuario entity = obj.orElseThrow(() -> new ResourceNotFoundException("Id não localizado!"));
-		return new UsuarioDTO(entity);
+		return new UsuarioDTO(entity, entity.getVeiculos());
 		
 	}
 

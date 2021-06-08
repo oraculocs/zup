@@ -2,8 +2,11 @@ package com.orangetalents.zup.dto;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.orangetalents.zup.entities.Usuario;
+import com.orangetalents.zup.entities.Veiculo;
 
 public class UsuarioDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
@@ -13,6 +16,8 @@ public class UsuarioDTO implements Serializable{
 	private String email;
 	private String cpf;
 	private Instant dataNascimento;
+	
+	private List<VeiculoDTO> veiculos = new ArrayList<>();
 	
 	public UsuarioDTO() {
 	}
@@ -32,6 +37,11 @@ public class UsuarioDTO implements Serializable{
 		this.email = entity.getEmail();
 		this.cpf = entity.getCpf();
 		this.dataNascimento = entity.getDataNascimento();
+	}
+	
+	public UsuarioDTO(Usuario entity, List<Veiculo> veiculos) {
+		this(entity);
+		veiculos.forEach(x -> this.veiculos.add(new VeiculoDTO(x)));
 	}
 
 	public Long getId() {
@@ -73,7 +83,11 @@ public class UsuarioDTO implements Serializable{
 	public void setDataNascimento(Instant dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
-	
-	
+
+	public List<VeiculoDTO> getVeiculos() {
+		return veiculos;
+	}
+
+		
 
 }

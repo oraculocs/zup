@@ -22,7 +22,7 @@ public class Veiculo implements Serializable{
 	
 	@NotEmpty(message = "Campo marca é obrigatório")
 	private String marca;
-	@NotEmpty(message = "Campo marca é obrigatório")
+	@NotEmpty(message = "Campo modelo é obrigatório")
 	private String modelo;
 	@NotEmpty(message = "Campo ano é obrigatório")
 	private Integer ano;
