@@ -2,13 +2,34 @@ package com.orangetalents.zup.entities;
 
 import java.io.Serializable;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+
+@Entity
+@Table(name = "tb_veiculo")
 public class Veiculo implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	@NotEmpty(message = "Campo marca é obrigatório")
 	private String marca;
+	@NotEmpty(message = "Campo marca é obrigatório")
 	private String modelo;
+	@NotEmpty(message = "Campo ano é obrigatório")
 	private Integer ano;
+	
+	@ManyToOne
+	@JoinColumn(name = "usuario_id")
+	private Usuario usuario;
 	
 	public Veiculo() {
 	}
@@ -51,6 +72,14 @@ public class Veiculo implements Serializable{
 
 	public void setAno(Integer ano) {
 		this.ano = ano;
+	}
+	
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 	@Override

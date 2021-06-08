@@ -2,17 +2,22 @@ package com.orangetalents.zup.entities;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 import org.hibernate.validator.constraints.br.CPF;
 
 
@@ -43,6 +48,11 @@ public class Usuario implements Serializable{
 	@NotNull
 	@Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
 	private Instant dataNascimento;
+	
+	@OneToMany(mappedBy = "usuario", orphanRemoval = true)
+	@Cascade(CascadeType.ALL)
+	private List<Veiculo> veiculos = new ArrayList<>();
+	
 	
 	public Usuario() {
 	}
@@ -93,6 +103,14 @@ public class Usuario implements Serializable{
 
 	public void setDataNascimento(Instant dataNascimento) {
 		this.dataNascimento = dataNascimento;
+	}
+	
+	public List<Veiculo> getVeiculos() {
+		return veiculos;
+	}
+
+	public void setVeiculos(List<Veiculo> veiculos) {
+		this.veiculos = veiculos;
 	}
 
 	@Override
