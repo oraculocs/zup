@@ -10,6 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "tb_veiculo")
@@ -24,7 +25,7 @@ public class Veiculo implements Serializable{
 	private String marca;
 	@NotEmpty(message = "Campo modelo é obrigatório")
 	private String modelo;
-	@NotEmpty(message = "Campo ano é obrigatório")
+	@NotNull(message = "Campo ano é obrigatório")
 	private Integer ano;
 	
 	@ManyToOne

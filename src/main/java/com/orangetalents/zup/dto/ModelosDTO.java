@@ -5,9 +5,11 @@ import java.util.List;
 
 public class ModelosDTO {
 
-private List<ItemDTO> modelos = new ArrayList<>();
+	private List<ItemDTO> modelos = new ArrayList<>();
 	
 	private List<AnoDTO> anos = new ArrayList<>();
+	
+	private List<ValorDTO> valor = new ArrayList<>();
 	
 	public ModelosDTO() {
 	}
@@ -27,4 +29,14 @@ private List<ItemDTO> modelos = new ArrayList<>();
 	public void setAnos(List<AnoDTO> anos) {
 		this.anos = anos;
 	}
+
+	public List<ValorDTO> getValor() {
+		return valor;
+	}
+
+	public void setValor(List<ValorDTO> valor) {
+		this.valor = valor;
+	}
+	
+	
 }
