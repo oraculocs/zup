@@ -3,6 +3,8 @@ package com.orangetalents.zup.entities;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -11,6 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+
+import com.orangetalents.zup.entities.enums.DataRodizio;
 
 @Entity
 @Table(name = "tb_veiculo")
@@ -31,6 +35,9 @@ public class Veiculo implements Serializable{
 	@ManyToOne
 	@JoinColumn(name = "usuario_id")
 	private Usuario usuario;
+	
+	@Enumerated(value = EnumType.STRING)
+	private DataRodizio dataRodizio;
 	
 	public Veiculo() {
 	}
@@ -81,6 +88,14 @@ public class Veiculo implements Serializable{
 
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
+	}
+
+	public DataRodizio getDataRodizio() {
+		return dataRodizio;
+	}
+
+	public void setDataRodizio(DataRodizio dataRodizio) {
+		this.dataRodizio = dataRodizio;
 	}
 
 	@Override

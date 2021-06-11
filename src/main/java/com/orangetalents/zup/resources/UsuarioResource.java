@@ -41,10 +41,15 @@ public class UsuarioResource {
 	}
 	
 	@PostMapping
-	public ResponseEntity<UsuarioDTO> insert(@Valid @RequestBody UsuarioDTO dto){
-		dto = service.insert(dto);
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dto.getId()).toUri();
-		return ResponseEntity.created(uri).body(dto);
+	public ResponseEntity<?> insert(@Valid @RequestBody UsuarioDTO dto){
+		try {
+			dto = service.insert(dto);
+			URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dto.getId()).toUri();
+			return ResponseEntity.created(uri).body(dto);
+		}catch(Exception e) {
+			return ResponseEntity.badRequest().body("Verifique as informações e tente novamente!");
+		}
+		
 	}
 	
 	@PutMapping(value = "/{id}")

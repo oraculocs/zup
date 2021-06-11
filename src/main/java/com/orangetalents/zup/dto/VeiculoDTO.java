@@ -3,6 +3,7 @@ package com.orangetalents.zup.dto;
 import java.io.Serializable;
 
 import com.orangetalents.zup.entities.Veiculo;
+import com.orangetalents.zup.entities.enums.DataRodizio;
 
 public class VeiculoDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
@@ -11,25 +12,27 @@ public class VeiculoDTO implements Serializable{
 	private String marca;
 	private String modelo;
 	private Integer ano;
-	
-	//private UsuarioDTO usuario;
+	//private DataRodizio dataRodizio;
 
 	public VeiculoDTO() {
 	}
-
+	
 	public VeiculoDTO(Long id, String marca, String modelo, Integer ano) {
+		super();
 		this.id = id;
 		this.marca = marca;
 		this.modelo = modelo;
 		this.ano = ano;
-		
 	}
+
 
 	public VeiculoDTO(Veiculo entity) {
 		this.id = entity.getId();
 		this.marca = entity.getMarca();
 		this.modelo = entity.getModelo();
 		this.ano = entity.getAno();
+		//this.dataRodizio = entity.getDataRodizio();
+		
 	}
 	
 	public Long getId() {
@@ -64,14 +67,13 @@ public class VeiculoDTO implements Serializable{
 		this.ano = ano;
 	}
 
-//	public UsuarioDTO getUsuario() {
-//		return usuario;
+//	public DataRodizio getDataRodizio() {
+//		return dataRodizio;
 //	}
 //
-//	public void setUsuario(UsuarioDTO usuario) {
-//		this.usuario = usuario;
+//	public void setDataRodizio(DataRodizio dataRodizio) {
+//		this.dataRodizio = dataRodizio;
 //	}
-	
-	
+
 
 }

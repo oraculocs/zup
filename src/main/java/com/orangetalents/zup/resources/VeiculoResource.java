@@ -23,38 +23,44 @@ import com.orangetalents.zup.services.VeiculoService;
 @RestController
 @RequestMapping(value = "/veiculos")
 public class VeiculoResource {
-	
+
 	@Autowired
 	private VeiculoService service;
-	
+
 	@GetMapping
-	public ResponseEntity<List<VeiculoDTO>> findAll(){
+	public ResponseEntity<List<VeiculoDTO>> findAll() {
 		List<VeiculoDTO> lista = service.findAll();
-		
+
 		return ResponseEntity.ok().body(lista);
 	}
-	
+
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<VeiculoDTO> findById(@PathVariable Long id){
+	public ResponseEntity<VeiculoDTO> findById(@PathVariable Long id) {
 		VeiculoDTO dto = service.findById(id);
 		return ResponseEntity.ok().body(dto);
 	}
-	
+
 	@PostMapping
-	public ResponseEntity<VeiculoDTO> insert(@Valid @RequestBody VeiculoDTO dto){
-		dto = service.insert(dto);
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dto.getId()).toUri();
-		return ResponseEntity.created(uri).body(dto);
+	public ResponseEntity<?> insert(@Valid @RequestBody VeiculoDTO dto) {
+		try {
+
+			dto = service.insert(dto);
+			URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dto.getId()).toUri();
+			return ResponseEntity.created(uri).body(dto);
+		} catch (Exception e) {
+			return ResponseEntity.badRequest().body("Erro ao Cadastrar veículo, verifique os campos!");
+			
+		}
 	}
-	
+
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<VeiculoDTO> update(@PathVariable Long id, @RequestBody VeiculoDTO dto){
+	public ResponseEntity<VeiculoDTO> update(@PathVariable Long id, @RequestBody VeiculoDTO dto) {
 		dto = service.update(id, dto);
 		return ResponseEntity.ok().body(dto);
 	}
 
 	@DeleteMapping(value = "/{id}")
-	public ResponseEntity<VeiculoDTO> delete(@PathVariable Long id){
+	public ResponseEntity<VeiculoDTO> delete(@PathVariable Long id) {
 		service.delete(id);
 		return ResponseEntity.noContent().build();
 	}
