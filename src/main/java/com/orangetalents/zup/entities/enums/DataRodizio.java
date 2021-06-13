@@ -2,12 +2,22 @@ package com.orangetalents.zup.entities.enums;
 
 public enum DataRodizio {
 	
-	SEGUNDA_FEIRA,
-	TERCA_FEIRA,
-	QUARTA_FEITA,
-	QUINTA_FEIRA,
-	SEXTA_FEIRA;
+	SEGUNDA_FEIRA("segunda-feira") ,
+	TERCA_FEIRA("terca-feira"),
+	QUARTA_FEITA("quarta-feira"),
+	QUINTA_FEIRA("quinta-feira"),
+	SEXTA_FEIRA("sexta-feira");
 	
+	private final String dataRodizio;
+	
+	DataRodizio(String s){
+		this.dataRodizio = s;
+	}
+
+	public String getDataRodizio() {
+		return dataRodizio;
+	}
+
 	public static DataRodizio verDia(String ano) {
 		int ultimoDigito = Integer.parseInt(ano.substring(ano.length() - 1));
 		

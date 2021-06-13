@@ -36,18 +36,24 @@ public class Veiculo implements Serializable{
 	@JoinColumn(name = "usuario_id")
 	private Usuario usuario;
 	
-	@Enumerated(value = EnumType.STRING)
-	private DataRodizio dataRodizio;
+	//@Enumerated(value = EnumType.STRING)
+	private String dataRodizio;
+	
+	private boolean rodizioAtivo;
 	
 	public Veiculo() {
 	}
 
-	public Veiculo(Long id, String marca, String modelo, Integer ano) {
+	public Veiculo(Long id, @NotEmpty(message = "Campo marca é obrigatório") String marca,
+			@NotEmpty(message = "Campo modelo é obrigatório") String modelo,
+			@NotNull(message = "Campo ano é obrigatório") Integer ano, String dataRodizio, boolean rodizioAtivo) {
 		super();
 		this.id = id;
 		this.marca = marca;
 		this.modelo = modelo;
 		this.ano = ano;
+		this.dataRodizio = dataRodizio;
+		this.rodizioAtivo = rodizioAtivo;
 	}
 
 	public Long getId() {
@@ -90,13 +96,22 @@ public class Veiculo implements Serializable{
 		this.usuario = usuario;
 	}
 
-	public DataRodizio getDataRodizio() {
+	public String getDataRodizio() {
 		return dataRodizio;
 	}
 
-	public void setDataRodizio(DataRodizio dataRodizio) {
+	public void setDataRodizio(String dataRodizio) {
 		this.dataRodizio = dataRodizio;
 	}
+
+	public boolean isRodizioAtivo() {
+		return rodizioAtivo;
+	}
+
+	public void setRodizioAtivo(boolean rodizioAtivo) {
+		this.rodizioAtivo = rodizioAtivo;
+	}
+	
 
 	@Override
 	public int hashCode() {

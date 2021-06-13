@@ -44,7 +44,7 @@ public class UsuarioService {
 
 	@Transactional
 	public UsuarioDTO insert(UsuarioDTO dto) {
-		try {
+		//try {
 			validaUsuario(dto);
 			Usuario entity = new Usuario();
 			entity.setNome(dto.getNome());
@@ -55,9 +55,9 @@ public class UsuarioService {
 			entity = repository.save(entity);
 
 			return new UsuarioDTO(entity);
-		} catch (Exception e) {
-			throw new ResourceNotFoundException("Verifique as informações e tente novamente!");
-		}
+//		} catch (Exception e) {
+//			throw new ResourceNotFoundException("Verifique as informações e tente novamente!");
+//		}
 	}
 
 	@Transactional
@@ -116,6 +116,9 @@ public class UsuarioService {
 		if (findByEmail(dto) != null) {
 			throw new com.orangetalents.zup.services.exceptions.DataIntegrityViolationException(
 					"E-mail já cadastrado na Base de Dados!");
+		}
+		if(dto.getNome() == null || dto.getCpf() == null || dto.getEmail() == null || dto.getDataNascimento() == null) {
+			throw new ResourceNotFoundException("Verifique as informações e tente novamente!");
 		}
 
 	}

@@ -107,7 +107,7 @@ public class Usuario implements Serializable{
 	public List<Veiculo> getVeiculos() {
 		return veiculos;
 	}
-
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

@@ -25,7 +25,7 @@ public class VerificarRodizio {
 	}
 	
 	//Método para pegar o dia da Semana
-	public static String diaDaSemana(String data) {
+	private static String diaDaSemana(String data) {
 	    DateTimeFormatter parser = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 	    DayOfWeek dow = DayOfWeek.from(parser.parse(data));
 	    return dow.getDisplayName(TextStyle.SHORT, new Locale("pt", "BR")).toUpperCase();

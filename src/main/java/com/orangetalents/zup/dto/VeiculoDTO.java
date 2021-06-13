@@ -12,17 +12,21 @@ public class VeiculoDTO implements Serializable{
 	private String marca;
 	private String modelo;
 	private Integer ano;
-	//private DataRodizio dataRodizio;
+	private String dataRodizio;
+	private boolean rodizioAtivo;
 
 	public VeiculoDTO() {
 	}
 	
-	public VeiculoDTO(Long id, String marca, String modelo, Integer ano) {
+	public VeiculoDTO(Long id, String marca, String modelo, Integer ano, String dataRodizio,
+			boolean rodizioAtivo) {
 		super();
 		this.id = id;
 		this.marca = marca;
 		this.modelo = modelo;
 		this.ano = ano;
+		this.dataRodizio = dataRodizio;
+		this.rodizioAtivo = rodizioAtivo;
 	}
 
 
@@ -31,7 +35,8 @@ public class VeiculoDTO implements Serializable{
 		this.marca = entity.getMarca();
 		this.modelo = entity.getModelo();
 		this.ano = entity.getAno();
-		//this.dataRodizio = entity.getDataRodizio();
+		this.dataRodizio = entity.getDataRodizio();
+		this.rodizioAtivo = entity.isRodizioAtivo();
 		
 	}
 	
@@ -67,13 +72,22 @@ public class VeiculoDTO implements Serializable{
 		this.ano = ano;
 	}
 
-//	public DataRodizio getDataRodizio() {
-//		return dataRodizio;
-//	}
-//
-//	public void setDataRodizio(DataRodizio dataRodizio) {
-//		this.dataRodizio = dataRodizio;
-//	}
+	public String getDataRodizio() {
+		return dataRodizio;
+	}
 
+	public void setDataRodizio(String dataRodizio) {
+		this.dataRodizio = dataRodizio;
+	}
+
+	public boolean isRodizioAtivo() {
+		return rodizioAtivo;
+	}
+
+	public void setRodizioAtivo(boolean rodizioAtivo) {
+		this.rodizioAtivo = rodizioAtivo;
+	}
+
+	
 
 }

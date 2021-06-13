@@ -88,6 +88,4 @@ public class UsuarioDTO implements Serializable{
 		return veiculos;
 	}
 
-		
-
 }
