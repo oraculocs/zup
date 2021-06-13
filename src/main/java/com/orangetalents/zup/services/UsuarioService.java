@@ -20,16 +20,17 @@ import com.orangetalents.zup.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class UsuarioService {
-	
+
 	@Autowired
 	private UsuarioRepository repository;
-	
+
 	@Transactional(readOnly = true)
-	public List<UsuarioDTO> findAll(){
+	public List<UsuarioDTO> findAll() {
 		List<Usuario> lista = repository.findAll();
-		
-		List<UsuarioDTO> listaDto = lista.stream().map(x -> new UsuarioDTO(x, x.getVeiculos())).collect(Collectors.toList());
-		
+
+		List<UsuarioDTO> listaDto = lista.stream().map(x -> new UsuarioDTO(x, x.getVeiculos()))
+				.collect(Collectors.toList());
+
 		return listaDto;
 	}
 
@@ -38,78 +39,84 @@ public class UsuarioService {
 		Optional<Usuario> obj = repository.findById(id);
 		Usuario entity = obj.orElseThrow(() -> new ResourceNotFoundException("Id não localizado!"));
 		return new UsuarioDTO(entity, entity.getVeiculos());
-		
+
 	}
 
 	@Transactional
 	public UsuarioDTO insert(UsuarioDTO dto) {
-		validaUsuario(dto);
-		Usuario entity = new Usuario();
-		entity.setNome(dto.getNome());
-		entity.setEmail(dto.getEmail());
-		entity.setCpf(dto.getCpf());
-		entity.setDataNascimento(dto.getDataNascimento());
-		
-		entity = repository.save(entity);
-		
-		return new UsuarioDTO(entity);
-	}
-
-	@Transactional
-	public UsuarioDTO update(Long id, UsuarioDTO dto) {
-		
 		try {
 			validaUsuario(dto);
-			Usuario entity = repository.getOne(id);
-			
+			Usuario entity = new Usuario();
 			entity.setNome(dto.getNome());
 			entity.setEmail(dto.getEmail());
 			entity.setCpf(dto.getCpf());
 			entity.setDataNascimento(dto.getDataNascimento());
-			
+
 			entity = repository.save(entity);
-			
+
 			return new UsuarioDTO(entity);
-		}catch(EntityNotFoundException e) {
+		} catch (Exception e) {
+			throw new ResourceNotFoundException("Verifique as informações e tente novamente!");
+		}
+	}
+
+	@Transactional
+	public UsuarioDTO update(Long id, UsuarioDTO dto) {
+
+		try {
+			validaUsuario(dto);
+			Usuario entity = repository.getOne(id);
+
+			entity.setNome(dto.getNome());
+			entity.setEmail(dto.getEmail());
+			entity.setCpf(dto.getCpf());
+			entity.setDataNascimento(dto.getDataNascimento());
+
+			entity = repository.save(entity);
+
+			return new UsuarioDTO(entity);
+		} catch (EntityNotFoundException e) {
 			throw new ResourceNotFoundException("Id não encontrado: " + id);
 		}
-		
+
 	}
 
 	public void delete(Long id) {
 		try {
 			repository.deleteById(id);
-			
-		}catch(EmptyResultDataAccessException e) {
+
+		} catch (EmptyResultDataAccessException e) {
 			throw new ResourceNotFoundException("Id não encontrado: " + id);
-		}catch(DataIntegrityViolationException e) {
+		} catch (DataIntegrityViolationException e) {
 			throw new DatabaseException("Integridade violada");
 		}
 	}
-	
+
 	private Usuario findByCPF(UsuarioDTO objDto) {
 		Usuario obj = repository.findbyCPF(objDto.getCpf());
-		if(obj != null) {
+		if (obj != null) {
 			return obj;
 		}
 		return null;
 	}
-	
+
 	private Usuario findByEmail(UsuarioDTO objDto) {
 		Usuario obj = repository.findByEmail(objDto.getEmail());
-		if(obj != null) {
+		if (obj != null) {
 			return obj;
 		}
 		return null;
 	}
-	
+
 	public void validaUsuario(UsuarioDTO dto) {
-		if(findByCPF(dto) != null) {
-			throw new com.orangetalents.zup.services.exceptions.DataIntegrityViolationException("CPF já cadastrado na base de Dados!");
+		if (findByCPF(dto) != null) {
+			throw new com.orangetalents.zup.services.exceptions.DataIntegrityViolationException(
+					"CPF já cadastrado na base de Dados!");
 		}
-		if(findByEmail(dto) != null) {
-			throw new com.orangetalents.zup.services.exceptions.DataIntegrityViolationException("E-mail já cadastrado na Base de Dados!");
+		if (findByEmail(dto) != null) {
+			throw new com.orangetalents.zup.services.exceptions.DataIntegrityViolationException(
+					"E-mail já cadastrado na Base de Dados!");
 		}
-		
+
 	}
 }
