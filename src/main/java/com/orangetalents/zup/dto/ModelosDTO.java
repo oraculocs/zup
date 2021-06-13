@@ -37,7 +37,5 @@ public class ModelosDTO {
 	public void setValor(ValorDTO valor) {
 		this.valor = valor;
 	}
-
-	
 		
 }

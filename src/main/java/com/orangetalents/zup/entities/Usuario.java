@@ -108,6 +108,10 @@ public class Usuario implements Serializable{
 		return veiculos;
 	}
 	
+	public void addVeiculo(Veiculo veiculo){
+        this.veiculos.add(veiculo);
+    }
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -139,7 +143,4 @@ public class Usuario implements Serializable{
 				+ dataNascimento;
 	}
 	
-	
-	
-
 }

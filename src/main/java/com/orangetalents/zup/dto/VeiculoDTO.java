@@ -88,6 +88,4 @@ public class VeiculoDTO implements Serializable{
 		this.rodizioAtivo = rodizioAtivo;
 	}
 
-	
-
 }

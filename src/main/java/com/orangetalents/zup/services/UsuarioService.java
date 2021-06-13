@@ -14,7 +14,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.orangetalents.zup.dto.UsuarioDTO;
 import com.orangetalents.zup.entities.Usuario;
+import com.orangetalents.zup.entities.Veiculo;
 import com.orangetalents.zup.repositories.UsuarioRepository;
+import com.orangetalents.zup.repositories.VeiculoRepository;
 import com.orangetalents.zup.services.exceptions.DatabaseException;
 import com.orangetalents.zup.services.exceptions.ResourceNotFoundException;
 
@@ -23,6 +25,9 @@ public class UsuarioService {
 
 	@Autowired
 	private UsuarioRepository repository;
+	
+	@Autowired
+	private VeiculoRepository veiculoRepository;
 
 	@Transactional(readOnly = true)
 	public List<UsuarioDTO> findAll() {
@@ -44,7 +49,7 @@ public class UsuarioService {
 
 	@Transactional
 	public UsuarioDTO insert(UsuarioDTO dto) {
-		//try {
+		
 			validaUsuario(dto);
 			Usuario entity = new Usuario();
 			entity.setNome(dto.getNome());
@@ -55,9 +60,11 @@ public class UsuarioService {
 			entity = repository.save(entity);
 
 			return new UsuarioDTO(entity);
-//		} catch (Exception e) {
-//			throw new ResourceNotFoundException("Verifique as informações e tente novamente!");
-//		}
+
+	}
+	
+	public void inserir(Usuario usuario) {
+		repository.save(usuario);
 	}
 
 	@Transactional
@@ -90,6 +97,15 @@ public class UsuarioService {
 		} catch (DataIntegrityViolationException e) {
 			throw new DatabaseException("Integridade violada");
 		}
+	}
+	
+	@Transactional
+	public void vincular(Long userId, Long veiculoId) {
+		Usuario objUsuario = repository.findById(userId).get();
+		Veiculo objVeiculo = veiculoRepository.findById(veiculoId).get();
+		objUsuario.addVeiculo(objVeiculo);
+		this.inserir(objUsuario);
+		
 	}
 
 	private Usuario findByCPF(UsuarioDTO objDto) {

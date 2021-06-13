@@ -6,6 +6,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.orangetalents.zup.dto.VeiculoDTO;
+import com.orangetalents.zup.services.UsuarioService;
 import com.orangetalents.zup.services.VeiculoService;
 
 @RestController
@@ -26,6 +28,9 @@ public class VeiculoResource {
 
 	@Autowired
 	private VeiculoService service;
+	
+	@Autowired
+	private UsuarioService usuarioService;
 
 	@GetMapping
 	public ResponseEntity<List<VeiculoDTO>> findAll() {
@@ -64,4 +69,16 @@ public class VeiculoResource {
 		service.delete(id);
 		return ResponseEntity.noContent().build();
 	}
+	
+	
+	@PutMapping("vincular/{userId}/{veiculoId}")
+    public ResponseEntity<?> vincularVeiculo(@PathVariable("userId") Long userId,
+                                             @PathVariable("veiculoId") Long veiculoId){
+        try {
+            usuarioService.vincular(userId, veiculoId);
+            return ResponseEntity.status(HttpStatus.OK).body("Veiculo vinculado ao usuário com sucesso!");
+        } catch (Exception e){
+            return ResponseEntity.status(HttpStatus.OK).body("Erro ao tentar vincular o veiculo a um usuário");
+        }
+    }
 }
