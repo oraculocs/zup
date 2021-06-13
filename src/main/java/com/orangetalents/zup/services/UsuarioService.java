@@ -43,9 +43,7 @@ public class UsuarioService {
 
 	@Transactional
 	public UsuarioDTO insert(UsuarioDTO dto) {
-		if(findByCPF(dto) != null) {
-			throw new com.orangetalents.zup.services.exceptions.DataIntegrityViolationException("CPF já cadastrado na base de dados!");
-		}
+		validaUsuario(dto);
 		Usuario entity = new Usuario();
 		entity.setNome(dto.getNome());
 		entity.setEmail(dto.getEmail());
@@ -61,6 +59,7 @@ public class UsuarioService {
 	public UsuarioDTO update(Long id, UsuarioDTO dto) {
 		
 		try {
+			validaUsuario(dto);
 			Usuario entity = repository.getOne(id);
 			
 			entity.setNome(dto.getNome());
@@ -94,5 +93,23 @@ public class UsuarioService {
 			return obj;
 		}
 		return null;
+	}
+	
+	private Usuario findByEmail(UsuarioDTO objDto) {
+		Usuario obj = repository.findByEmail(objDto.getEmail());
+		if(obj != null) {
+			return obj;
+		}
+		return null;
+	}
+	
+	public void validaUsuario(UsuarioDTO dto) {
+		if(findByCPF(dto) != null) {
+			throw new com.orangetalents.zup.services.exceptions.DataIntegrityViolationException("CPF já cadastrado na base de Dados!");
+		}
+		if(findByEmail(dto) != null) {
+			throw new com.orangetalents.zup.services.exceptions.DataIntegrityViolationException("E-mail já cadastrado na Base de Dados!");
+		}
+		
 	}
 }

@@ -9,7 +9,7 @@ public class ModelosDTO {
 	
 	private List<AnoDTO> anos = new ArrayList<>();
 	
-	private List<ValorDTO> valor = new ArrayList<>();
+	private ValorDTO valor;
 	
 	public ModelosDTO() {
 	}
@@ -30,13 +30,14 @@ public class ModelosDTO {
 		this.anos = anos;
 	}
 
-	public List<ValorDTO> getValor() {
+	public ValorDTO getValor() {
 		return valor;
 	}
 
-	public void setValor(List<ValorDTO> valor) {
+	public void setValor(ValorDTO valor) {
 		this.valor = valor;
 	}
+
 	
-	
+		
 }

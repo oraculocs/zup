@@ -25,9 +25,9 @@ public class FipeResource {
 	}
 	
 	@GetMapping(value = "/{marcaId}/modelos/{codigoFipe}/anos/{ano}-3")
-	public ResponseEntity<ValorDTO> getValor(@PathVariable Long marcaId, 
-												@PathVariable String codigoFipe,
-												@PathVariable Integer ano){
+	public ResponseEntity<ValorDTO> getValor(@PathVariable(name = "marcaId") Long marcaId, 
+												@PathVariable(name = "codigoFipe") String codigoFipe,
+												@PathVariable(name = "ano") Integer ano){
 		ValorDTO dto = service.getValor(marcaId, codigoFipe, ano);
 		return ResponseEntity.ok().body(dto);
 	}

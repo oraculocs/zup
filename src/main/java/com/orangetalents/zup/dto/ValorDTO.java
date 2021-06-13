@@ -1,106 +1,102 @@
 package com.orangetalents.zup.dto;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
+
 public class ValorDTO {
 	
-	private Double Valor;
-	private String Marca;
-	private String Modelo;
-	private Integer AnoModelo;
-	private String Combustivel;
-	private String CodigoFipe;
-	private String MesReferencia;
-	private Integer TipoVeiculo;
-	private String SiglaCombustivel;
-	
+	@JsonAlias("Valor")
+	private String valor;
+	@JsonAlias("Marca")
+	private String marca;
+	@JsonAlias("Modelo")
+	private String modelo;
+	@JsonAlias("AnoModelo")
+	private String anoModelo;
+	@JsonAlias("Combustivel")
+	private String combustivel;
+	@JsonAlias("CodigoFipe")
+	private String codigoFipe;
+	@JsonAlias("MesReferencia")
+	private String mesReferencia;
+	@JsonAlias("TipoVeiculo")
+	private String tipoVeiculo;
+	@JsonAlias("SiglaCombustivel")
+	private String siglaCombustivel;
+
 	public ValorDTO() {
 	}
 
-	public ValorDTO(Double valor, String marca, String modelo, Integer anoModelo, String combustivel, String codigoFipe,
-			String mesReferencia, Integer tipoVeiculo, String siglaCombustivel) {
-		super();
-		Valor = valor;
-		Marca = marca;
-		Modelo = modelo;
-		AnoModelo = anoModelo;
-		Combustivel = combustivel;
-		CodigoFipe = codigoFipe;
-		MesReferencia = mesReferencia;
-		TipoVeiculo = tipoVeiculo;
-		SiglaCombustivel = siglaCombustivel;
+	public String getValor() {
+		return valor;
 	}
 
-	public Double getValor() {
-		return Valor;
-	}
-
-	public void setValor(Double valor) {
-		Valor = valor;
+	public void setValor(String valor) {
+		this.valor = valor;
 	}
 
 	public String getMarca() {
-		return Marca;
+		return marca;
 	}
 
 	public void setMarca(String marca) {
-		Marca = marca;
+		this.marca = marca;
 	}
 
 	public String getModelo() {
-		return Modelo;
+		return modelo;
 	}
 
 	public void setModelo(String modelo) {
-		Modelo = modelo;
+		this.modelo = modelo;
 	}
 
-	public Integer getAnoModelo() {
-		return AnoModelo;
+	public String getAnoModelo() {
+		return anoModelo;
 	}
 
-	public void setAnoModelo(Integer anoModelo) {
-		AnoModelo = anoModelo;
+	public void setAnoModelo(String anoModelo) {
+		this.anoModelo = anoModelo;
 	}
 
 	public String getCombustivel() {
-		return Combustivel;
+		return combustivel;
 	}
 
 	public void setCombustivel(String combustivel) {
-		Combustivel = combustivel;
+		this.combustivel = combustivel;
 	}
 
 	public String getCodigoFipe() {
-		return CodigoFipe;
+		return codigoFipe;
 	}
 
 	public void setCodigoFipe(String codigoFipe) {
-		CodigoFipe = codigoFipe;
+		this.codigoFipe = codigoFipe;
 	}
 
 	public String getMesReferencia() {
-		return MesReferencia;
+		return mesReferencia;
 	}
 
 	public void setMesReferencia(String mesReferencia) {
-		MesReferencia = mesReferencia;
+		this.mesReferencia = mesReferencia;
 	}
 
-	public Integer getTipoVeiculo() {
-		return TipoVeiculo;
+	public String getTipoVeiculo() {
+		return tipoVeiculo;
 	}
 
-	public void setTipoVeiculo(Integer tipoVeiculo) {
-		TipoVeiculo = tipoVeiculo;
+	public void setTipoVeiculo(String tipoVeiculo) {
+		this.tipoVeiculo = tipoVeiculo;
 	}
 
 	public String getSiglaCombustivel() {
-		return SiglaCombustivel;
+		return siglaCombustivel;
 	}
 
 	public void setSiglaCombustivel(String siglaCombustivel) {
-		SiglaCombustivel = siglaCombustivel;
+		this.siglaCombustivel = siglaCombustivel;
 	}
-	
-	
 
+	
 }
